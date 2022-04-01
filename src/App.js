@@ -3,6 +3,7 @@ import Container from "./Container";
 import Button from "./Button";
 import axios from "axios";
 import "./App.css";
+import ContainerMulti from "./ContainerMulti";
 
 const localImages = [
   "https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg",
@@ -18,6 +19,8 @@ function App() {
   // use this line instead of the above line to get a random image
   const [images, setImages] = useState(localImages);
   const [index, setIndex] = useState(0);
+  // define how many you want to show in the container
+  const [increment, setIncrement] = useState(3);
 
   const getImages = async (array) => {
     // get list of random images from an API endpoint
@@ -43,26 +46,30 @@ function App() {
   const handlePrevious = () => {
     setIndex((index) => {
       // if current index is 0, set the next to last image (create a loop)
-      if (index === 0) {
-        return images.length - 1;
+      if (index < 1) {
+        return images.length - increment;
       }
-      return index - 1;
+      return index - increment;
     });
   };
 
   const handleNext = () => {
     setIndex((index) => {
       // if current index is the last image, set the next to first image (create a loop)
-      if (index === images.length - 1) {
+      if (index > images.length - 1) {
         return 0;
       }
-      return index + 1;
+      return index + increment;
     });
   };
 
   return (
     <>
-      <Container image={images[index]} />
+      {/* <Container image={images[index]} /> */}
+      <ContainerMulti
+        images={images.slice(index, index + increment)}
+        rowHeight={200}
+      />
       <Button onClick1={handlePrevious} onClick2={handleNext} />
     </>
   );
