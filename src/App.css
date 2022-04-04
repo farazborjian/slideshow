@@ -48,6 +48,10 @@
   height: fit-content;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  /* 3 by 2 grid */
+  /* grid-template-columns: repeat(3, 1fr); */
+  /* grid-template-rows: repeat(2, 1fr); */
+
   grid-template-rows: repeat(auto-fit, minmax(100px));
   gap: 10px;
   background-color: chartreuse;
